@@ -17,8 +17,6 @@ class FaceStraighten:
         face_aligned = face_aligned[padding: 224-padding, padding: 224-padding]
         return face_aligned
 
-def get_face_encodings():
-    pass
 
 def get_centers(landmarks):
     EYE_LEFT_OUTTER = landmarks[2]
@@ -55,7 +53,7 @@ def landmarks_to_np(landmarks, dtype="int"):
 
 def get_aligned_face(gray, face_location, landmarks_predictor):
 
-    rect = dlib.rectangle(face_location[0], face_location[1], face_location[2], face_location[3]) 
+    rect = dlib.rectangle(face_location[0], face_location[1], face_location[2], face_location[3])
     landmarks = landmarks_predictor(gray, rect)
     landmarks = landmarks_to_np(landmarks)
 

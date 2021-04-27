@@ -1,12 +1,7 @@
-from imutils.video import VideoStream, FileVideoStream
 from keras_vggface.vggface import VGGFace
 from keras_vggface.utils import preprocess_input
 from keras.preprocessing import image as img_keras
-import face_recognition
-import argparse
-import imutils
 import pickle
-import time
 import cv2
 import nmslib
 import numpy as np
@@ -122,6 +117,7 @@ class FaceRecognizer():
     def recognize(self, face_img):
         face_img = cv2.cvtColor(face_img, cv2.COLOR_BGR2RGB)
         embedding = self.get_embedding_vggface(face_img)[0]
+        print('embedding', embedding.shape)
         ids, props = self.predictor.predict(np.array([embedding]))
         id = ids[0] if ids[0] != self.unknown_id else 0
 
