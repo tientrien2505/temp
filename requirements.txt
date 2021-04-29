@@ -6,3 +6,5 @@ dlib
 keras_vggface
 keras
 face_recognition
+insightface
+mxnet

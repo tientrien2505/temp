@@ -1,8 +1,9 @@
 import cv2
 from face_module.recognizer import FaceRecognizer
-from face_module.detector import Detector
+from face_module.detector import DetectorBuilder
+from time import time
 recognizer = FaceRecognizer()
-detector = Detector()
+detector = DetectorBuilder.build('retina', gpu=True)
 vc = cv2.VideoCapture(0)
 while True:
     ret, img = vc.read()
@@ -12,10 +13,10 @@ while True:
         img = cv2.rectangle(img, (left, top), (right, bottom), (0, 255, 0), 5)
         face_img = img[top:bottom, left:right]
         label, prop = recognizer.recognize(face_img)
-        img = cv2.putText(img, str(label) + f'accuracy: {prop:.2}', (left, top), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
-    cv2.imshow('video', img)
-    if cv2.waitKey(1) & 0xff == ord('q'):
-        break
+        # img = cv2.putText(img, str(label) + f'accuracy: {prop:.2}', (left, top), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
+    # cv2.imshow('video', img)
+    # if cv2.waitKey(1) & 0xff == ord('q'):
+    #     break
 
-vc.release()
-cv2.destroyAllWindows()
+# vc.release()
+# cv2.destroyAllWindows()
